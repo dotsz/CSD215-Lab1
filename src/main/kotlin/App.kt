@@ -1,3 +1,6 @@
+import java.io.File
+
+data class Task(val taskDescription: String, val isComplete: Boolean)
 
 /**
     Simple Kotlin ToDo List App
@@ -5,27 +8,38 @@
 **/
 fun main() {
 
-    // a data class that represents a task
-    data class Tasks(val taskDescription: String, val isComplete: Boolean)
 
     println("Welcome to the Kotlin ToDo List App")
     println("---------------------------------")
+
+    // Load tasks from text file and make a list of Task objects
+
 
     // Main loop that will keep the app running until the user decides to quit
     while(true){
         val input = promptForInput()
         when(input){
             "a" -> addTask()
-            "c" -> println("Complete a task")
-            "r" -> println("Remove a task")
-            "q" -> {
-                println("Goodbye!")
-                break
-            }
+            "c" -> toggleTaskCompletion()
+            "r" -> removeTask()
+            "q" -> quit()
             else -> println("Invalid input. Please try again.")
         }
     }
 
+}
+
+
+fun loadTasksFromFile(): List<Task> {
+    val tasks = listOf<Task>()
+    val file = File("tasks.txt")
+    if(file.exists()){
+        file.forEachLine {
+            // parse strings from file and create Task objects
+        }
+
+    }
+    return tasks
 }
 
 
@@ -46,11 +60,15 @@ fun promptForInput(): String? {
     Prompts the user to add a task.
     @return the task description as a String, or null if the input is null
 **/
-fun addTask() {
+fun addTask() : List<Task> {
     println("Enter task description: ")
+    val taskDescription = readlnOrNull()?: return emptyList()
 
-    // some logic to add the task to an immutable list
-    // copy the list to add new task
+    val newTask = Task(taskDescription, false)
+
+    val tasks = listOf(newTask)
+
+    return tasks
 }
 
 /**
@@ -59,13 +77,17 @@ fun addTask() {
 fun toggleTaskCompletion() {
     // some logic to toggle the completion status of a task
 }
-
+/**
+    remove task from the list
+ **/
 fun removeTask() {
     // some logic to remove a task from the list
 }
 
 fun quit(){
     // logic to save the task data class to a text file
+
+
 }
 
 
