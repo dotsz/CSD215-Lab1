@@ -1,0 +1,3 @@
+✓ Finish Lab1 in Programming Paradigm
+  Learn how to cartwheel
+  Hack NASA
