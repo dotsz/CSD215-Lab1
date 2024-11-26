@@ -1,3 +1,5 @@
+package lab1
+
 import java.io.File
 
 data class Task(val taskDescription: String, val isComplete: Boolean)
