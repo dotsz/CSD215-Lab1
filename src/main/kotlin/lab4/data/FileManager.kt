@@ -4,8 +4,19 @@ import lab4.model.Task
 import lab4.model.TaskStatus
 import java.io.File
 
+
+/**
+ * Manages reading and writing tasks to a file.
+ *
+ * @property fileName the name of the file to read and write tasks
+ */
 class FileManager(private val fileName: String) {
 
+    /**
+     * Loads tasks from the file.
+     *
+     * @return a list of tasks
+     */
     fun loadTasks(): List<Task> {
         val taskList = mutableListOf<Task>()
         val file = File(fileName)
@@ -26,6 +37,11 @@ class FileManager(private val fileName: String) {
         return taskList
     }
 
+    /**
+     * Saves tasks to the file.
+     *
+     * @param tasks the list of tasks to save
+     */
     fun saveTasks(tasks: List<Task>) {
         val file = File(fileName)
         file.writeText("")

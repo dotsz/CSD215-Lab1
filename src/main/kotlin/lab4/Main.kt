@@ -5,6 +5,10 @@ import lab4.presentation.ConsoleUI
 import lab4.data.FileManager
 import lab4.model.TaskStatus
 
+/**
+ * Main function that runs the application.
+ *
+ */
 fun main() {
     val fileManager = FileManager("tasks.txt")
     val ui = ConsoleUI()
