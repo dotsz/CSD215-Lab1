@@ -1,4 +1,4 @@
-package lab4.model
+package lab1.model
 
 /**
  * Represents a task in the to-do list.

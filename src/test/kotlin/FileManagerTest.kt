@@ -1,6 +1,6 @@
-import lab4.data.FileManager
-import lab4.model.Task
-import lab4.model.TaskStatus
+import lab1.data.FileManager
+import lab1.model.Task
+import lab1.model.TaskStatus
 import java.io.File
 
 import kotlin.test.Test

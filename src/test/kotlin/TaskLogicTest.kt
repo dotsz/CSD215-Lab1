@@ -1,6 +1,6 @@
-import lab4.logic.TaskLogic
-import lab4.model.Task
-import lab4.model.TaskStatus
+import lab1.logic.TaskLogic
+import lab1.model.Task
+import lab1.model.TaskStatus
 import kotlin.test.Test
 
 class TaskLogicTest {

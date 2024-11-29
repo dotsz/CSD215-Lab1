@@ -1,9 +1,9 @@
-package lab4
+package lab1
 
 
-import lab4.presentation.ConsoleUI
-import lab4.data.FileManager
-import lab4.model.Task
+import lab1.presentation.ConsoleUI
+import lab1.data.FileManager
+import lab1.model.Task
 
 
 /**

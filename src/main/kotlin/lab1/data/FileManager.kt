@@ -1,7 +1,7 @@
-package lab4.data
+package lab1.data
 
-import lab4.model.Task
-import lab4.model.TaskStatus
+import lab1.model.Task
+import lab1.model.TaskStatus
 import java.io.File
 
 

@@ -1,4 +1,4 @@
-package lab4.model
+package lab1.model
 
 /**
  * Represents the status of a task.

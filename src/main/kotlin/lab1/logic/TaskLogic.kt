@@ -1,7 +1,7 @@
-package lab4.logic
+package lab1.logic
 
-import lab4.model.Task
-import lab4.model.TaskStatus
+import lab1.model.Task
+import lab1.model.TaskStatus
 
 
 /**
