@@ -2,12 +2,11 @@ package lab4.model
 
 /**
  * Represents the status of a task.
- *
+ * A task can be either complete or incomplete.
  */
-sealed class TaskStatus{
-    object Complete : TaskStatus()
-    object Incomplete : TaskStatus()
+sealed class TaskStatus{ // Sum type to represent the status of a task
+    data object Complete : TaskStatus()
+    data object Incomplete : TaskStatus()
 }
 
-// used sealed class because it is a good way to represent a fixed number of possible states
 

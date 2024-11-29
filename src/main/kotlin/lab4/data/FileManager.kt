@@ -18,23 +18,24 @@ class FileManager(private val fileName: String) {
      * @return a list of tasks
      */
     fun loadTasks(): List<Task> {
-        val taskList = mutableListOf<Task>()
         val file = File(fileName)
-
-        if (file.exists()) {
-            file.forEachLine { line ->
-                val isComplete = line.startsWith("✓")
-                val description = line.removePrefix("✓").trim()
-
-                if (description.isNotBlank()) {
-                    val status = if (isComplete) TaskStatus.Complete else TaskStatus.Incomplete
-                    taskList.add(Task(description, status))
-                } else {
-                    throw Exception("Invalid task format: $line")
-                }
+        try {
+            if(!file.exists()) {
+                file.createNewFile() // create file if it doesn't exist
             }
+
+            return file.readLines().map { line ->
+                val status = if (line.startsWith("✓")) {
+                    TaskStatus.Complete
+                } else {
+                    TaskStatus.Incomplete
+                }
+                Task(line.removePrefix("✓ "), status)
+            }
+        }catch (e: Exception) {
+            println("An error occurred while reading the file.")
+            return emptyList()
         }
-        return taskList
     }
 
     /**
@@ -43,15 +44,20 @@ class FileManager(private val fileName: String) {
      * @param tasks the list of tasks to save
      */
     fun saveTasks(tasks: List<Task>) {
-        val file = File(fileName)
-        file.writeText("")
-        tasks.forEach { task ->
-            val line = if (task.status is TaskStatus.Complete) {
-                "✓ ${task.description}"
-            } else {
-                task.description
-            }
-            file.appendText("$line\n")
+        val lines = prepareTaskLines(tasks)
+        File(fileName).writeText(lines.joinToString("\n"))
+    }
+
+    /**
+     * Prepares the task lines to write to the file.
+     * converts the list of tasks to a list of strings
+     *
+     * @param tasks the list of tasks
+     * @return a list of strings representing the tasks
+     */
+    private fun prepareTaskLines (tasks: List<Task>): List<String> {
+        return tasks.map { task ->
+            "${if (task.status is TaskStatus.Complete) "✓" else ""} ${task.description}"
         }
     }
 }

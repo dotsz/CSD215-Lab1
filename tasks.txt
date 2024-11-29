@@ -1,3 +1,3 @@
 ✓ Finish lab1 in Programming Paradigm
-  Learn how to cartwheel
-  Hack NASA
+Learn how to cartwheel
+Hack NASA

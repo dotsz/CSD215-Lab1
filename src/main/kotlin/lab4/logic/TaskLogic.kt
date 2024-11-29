@@ -3,48 +3,47 @@ package lab4.logic
 import lab4.model.Task
 import lab4.model.TaskStatus
 
+
 /**
- * Contains the business logic for managing tasks.
+ * Handles the logic for managing tasks.
+ *
+ * @param taskList the list of tasks
+ * @param description the description of the new task
+ * @param taskIndex the index of the task to modify/remove
+ * @return the updated list of tasks
  *
  */
-object TaskLogic {
-    /**
-     * Adds a new task to the list.
-     *
-     * @param taskList the list of tasks
-     * @param taskDescription the description of the new task
-     * @return the updated list of tasks
-     */
-    fun addTask(taskList: List<Task>, taskDescription: String): List<Task> {
-        val newTask = Task(taskDescription, TaskStatus.Incomplete)
-        return taskList + newTask
+object TaskLogic { // object instead of class because it doesn't need multiple instances, singleton object
+
+    // Add a new task
+    fun addTask(taskList: List<Task>, description: String): List<Task> {
+        return taskList + Task(description, TaskStatus.Incomplete) // create a new list with the new task added
     }
 
-    /**
-     * Removes a task from the list.
-     *
-     * @param taskList the list of tasks
-     * @param taskIndex the index of the task to remove
-     * @return the updated list of tasks
-     */
+    // Remove a task
     fun removeTask(taskList: List<Task>, taskIndex: Int): List<Task> {
-        return taskList.filterIndexed { index, _ -> index != taskIndex }
+        if (taskIndex !in taskList.indices) {
+            return taskList // Return the original list if index is invalid
+        }
+        return taskList.filterIndexed { index, _ -> index != taskIndex } // create a new list without the task that matches the index
     }
 
-    /**
-     * Toggles the completion status of a task.
-     *
-     * @param taskList the list of tasks
-     * @param taskIndex the index of the task to update
-     * @return the updated list of tasks
-     */
+    // Toggle task completion
     fun toggleTaskCompletion(taskList: List<Task>, taskIndex: Int): List<Task> {
+        if (taskIndex !in taskList.indices) {
+            return taskList // Return the original list if index is invalid
+        }
         return taskList.mapIndexed { index, task ->
             if (index == taskIndex) {
-                task.copy(status = if (task.status is TaskStatus.Complete) TaskStatus.Incomplete else TaskStatus.Complete)
+                task.copy(
+                    status = when (task.status) {
+                        TaskStatus.Incomplete -> TaskStatus.Complete
+                        TaskStatus.Complete -> TaskStatus.Incomplete
+                    }
+                )
             } else {
                 task
-            }
+            } // create a new list with the task at the index toggled
         }
     }
 }

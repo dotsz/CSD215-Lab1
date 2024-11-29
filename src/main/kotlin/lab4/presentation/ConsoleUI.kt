@@ -34,7 +34,7 @@ class ConsoleUI {
         println("c - Complete a task")
         println("r - Remove a task")
         println("q - Quit")
-        return readlnOrNull() ?: ""
+        return readlnOrNull() ?: "" // return empty string if null
     }
 
     /**
