@@ -33,12 +33,12 @@ fun applicationLoop (taskList: List<Task>, fileManager: FileManager, ui: Console
         }
         "c" -> {
             val index = ui.promptTaskIndex()
-            val newTaskList = TaskLogic.toggleTaskCompletion(taskList, index - 1)
+            val newTaskList = TaskLogic.toggleTaskCompletion(taskList, index)
             applicationLoop(newTaskList, fileManager, ui)
         }
         "r" -> {
             val index = ui.promptTaskIndex()
-            val newTaskList = TaskLogic.removeTask(taskList, index - 1)
+            val newTaskList = TaskLogic.removeTask(taskList, index)
             applicationLoop(newTaskList, fileManager, ui)
         }
         "q" -> return taskList // base case: return taskList to save to file, stopping the recursion

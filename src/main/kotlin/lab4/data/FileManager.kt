@@ -25,12 +25,12 @@ class FileManager(private val fileName: String) {
             }
 
             return file.readLines().map { line ->
-                val status = if (line.startsWith("✓")) {
+                val status = if (line.startsWith("\u2713")) {
                     TaskStatus.Complete
                 } else {
                     TaskStatus.Incomplete
                 }
-                Task(line.removePrefix("✓ "), status)
+                Task(line.removePrefix("\u2713").trim(), status)
             }
         }catch (e: Exception) {
             println("An error occurred while reading the file.")
@@ -57,7 +57,11 @@ class FileManager(private val fileName: String) {
      */
     private fun prepareTaskLines (tasks: List<Task>): List<String> {
         return tasks.map { task ->
-            "${if (task.status is TaskStatus.Complete) "✓" else ""} ${task.description}"
+            if (task.status is TaskStatus.Complete) {
+                "\u2713 ${task.description}"
+            } else {
+                task.description
+            }
         }
     }
 }

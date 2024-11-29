@@ -22,19 +22,19 @@ object TaskLogic { // object instead of class because it doesn't need multiple i
 
     // Remove a task
     fun removeTask(taskList: List<Task>, taskIndex: Int): List<Task> {
-        if (taskIndex !in taskList.indices) {
+        if (!validateIndex(taskList, taskIndex)) {
             return taskList // Return the original list if index is invalid
         }
-        return taskList.filterIndexed { index, _ -> index != taskIndex } // create a new list without the task that matches the index
+        return taskList.filterIndexed { index, _ -> index != taskIndex - 1 } // create a new list without the task that matches the index
     }
 
     // Toggle task completion
     fun toggleTaskCompletion(taskList: List<Task>, taskIndex: Int): List<Task> {
-        if (taskIndex !in taskList.indices) {
+        if (!validateIndex(taskList, taskIndex)) {
             return taskList // Return the original list if index is invalid
         }
         return taskList.mapIndexed { index, task ->
-            if (index == taskIndex) {
+            if (index == taskIndex - 1) {
                 task.copy(
                     status = when (task.status) {
                         TaskStatus.Incomplete -> TaskStatus.Complete
@@ -45,5 +45,10 @@ object TaskLogic { // object instead of class because it doesn't need multiple i
                 task
             } // create a new list with the task at the index toggled
         }
+    }
+
+    // Validate the index if it is within the bounds of the task list
+    private fun validateIndex(taskList: List<Task>, taskIndex: Int): Boolean {
+        return taskIndex - 1 in taskList.indices
     }
 }
