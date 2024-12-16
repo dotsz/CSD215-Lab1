@@ -11,10 +11,6 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-
-//    implementation("org.jetbrains.kotlin:kotlin-stdlib")
-
-
 }
 
 tasks.test {
