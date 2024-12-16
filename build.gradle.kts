@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-
+    implementation(kotlin("stdlib"))
     testImplementation(kotlin("test"))
 }
 
@@ -19,9 +19,4 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(21)
-}
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21)) // Ensure this matches too
-    }
 }
